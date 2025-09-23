@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Business Card Creator | Futuristic Design 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="glow-effect"></div>
+  <div class="floating-element"></div>
+  <div class="floating-element"></div>
+  <div class="floating-element"></div>
+
+  <div class="app">
+    <aside class="sidebar" aria-label="Sidebar">
+      <div class="brand">
+        <div class="logo-sample">BC</div>
+        <div>
+          <div class="title">Digital Business Card Creator</div>
+          <div class="subtitle">Futuristic Design 2026</div>
+        </div>
+      </div>
+
+      <div class="section-title">
+        <span>Ready Templates</span>
+        <button id="clearAll" class="icon-btn" title="Clear All">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="templates" id="templateList"></div>
+
+      <div style="margin-top: 20px;">
+        <button id="resetBtn" class="btn-secondary" style="width: 100%">Reset Design</button>
+      </div>
+
+      <div style="margin-top: 24px">
+        <div class="section-title">Saved Designs</div>
+        <div id="savedList" class="saved-list" aria-live="polite"></div>
+      </div>
+    </aside>
+
+    <main class="main" role="main">
+      <div class="stage">
+        <div class="card-stage" aria-label="Card Preview">
+          <div id="cardPreview" class="card t1" data-template="1" role="region" aria-label="Business Card Preview">
+            <!-- Draggable Elements -->
+            <div class="draggable" id="tagLabel" style="top:15px;left:15px;font-size:11px;color:#6e44ff;font-weight:600">Digital Business Card</div>
+            <div class="draggable" id="logoPreview" style="top:15px;right:15px;width:60px;height:60px;border-radius:12px;background:linear-gradient(135deg,#6e44ff,#00e5ff);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:20px">LC</div>
+            <div class="draggable" id="infoBlock" style="top:85px;right:15px;text-align:right">
+              <h3 id="namePreview" style="margin:0;font-size:18px;color:#1a1a2e">Full Name</h3>
+              <p id="rolePreview" style="margin:6px 0;color:#6e44ff;font-size:14px;font-weight:500">Job Title</p>
+              <p id="emailPreview" style="margin:4px 0;color:#5c6370;font-size:13px">email@example.com</p>
+              <p id="phonePreview" style="margin:4px 0;color:#5c6370;font-size:13px">+966 5X XXX XXXX</p>
+            </div>
+            <div class="draggable" id="webLabel" style="left:15px;bottom:15px;font-size:11px;color:#6e44ff;font-weight:600">www.example.com</div>
+            <!-- New QR Code Element -->
+            <div class="draggable" id="qrCodeContainer" style="display: none; width: 80px; height: 80px; bottom: 20px; right: 20px;"></div>
+          </div>
+        </div>
+
+        <div class="controls" aria-label="Control Panel">
+          <div class="toolbar">
+            <button id="downloadPng" class="btn" title="Download PNG">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+              </svg>
+              PNG
+            </button>
+            <button id="downloadJpg" class="btn-secondary" title="Download JPG">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+              </svg>
+              JPG
+            </button>
+            <button id="downloadPdf" class="btn-secondary" title="Download PDF">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+              </svg>
+              PDF
+            </button>
+            <button id="saveDesign" class="btn-secondary" title="Save Design">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/>
+              </svg>
+              Save
+            </button>
+            <!-- New button to add/remove QR Code -->
+            <button id="toggleQr" class="btn-secondary" title="Add/Remove QR Code">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+              Advanced QR Code
+            </button>
+          </div>
+          <div class="shortcut-hint">Ctrl/Cmd + S for Quick Save | Ctrl/Cmd + Q for QR Code</div>
+
+          <div class="form-group">
+            <label for="nameInput">Full Name</label>
+            <input id="nameInput" type="text" value="Full Name" />
+          </div>
+
+          <div class="form-group">
+            <label for="roleInput">Job Title</label>
+            <input id="roleInput" type="text" value="Job Title" />
+          </div>
+
+          <div class="row">
+            <div class="form-group">
+              <label for="emailInput">Email Address</label>
+              <input id="emailInput" type="email" value="email@example.com" />
+            </div>
+            <div class="form-group">
+              <label for="phoneInput">Phone Number</label>
+              <input id="phoneInput" type="text" value="+966 5X XXX XXXX" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="logoInput">Upload Logo</label>
+            <input id="logoInput" type="file" accept="image/*" />
+          </div>
+
+          <div class="form-group">
+            <label for="accentColor">Accent Color</label>
+            <input id="accentColor" type="color" value="#6e44ff" />
+          </div>
+
+          <div class="form-group">
+            <label>Card Background</label>
+            <div class="bg-type-selector">
+              <button class="bg-type-btn active" data-type="solid">Solid Color</button>
+              <button class="bg-type-btn" data-type="gradient">Gradient</button>
+            </div>
+            <div class="color-controls">
+              <input id="bgColor1" type="color" value="#ffffff" />
+              <div id="bgColorPreview" class="color-preview" style="background: #ffffff"></div>
+              <input id="bgColor2" type="color" value="#6e44ff" style="display: none;" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="templateSelect">Select Design Template</label>
+            <select id="templateSelect">
+              <option value="1">Template 1 — Clean & Warm</option>
+              <option value="2">Template 2 — Modern Simple</option>
+              <option value="3">Template 3 — Corporate</option>
+              <option value="4">Template 4 — Formal</option>
+              <option value="5">Template 5 — Creative</option>
+              <option value="6">Template 6 — Shiny</option>
+              <option value="7">Template 7 — Elegant</option>
+              <option value="8">Template 8 — Colorful</option>
+              <option value="9">Template 9 — Classic</option>
+              <option value="10">Template 10 — Unique</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="bgInput">Custom Background (URL)</label>
+            <input id="bgInput" type="text" placeholder="https://example.com/background.jpg" />
+          </div>
+
+          <!-- New QR Code Settings -->
+          <div class="form-group" id="qrSettings" style="display: none;">
+            <label>Advanced QR Code Settings</label>
+            
+            <div class="row">
+              <div class="form-group">
+                <label for="qrStyle">Design Style:</label>
+                <select id="qrStyle">
+                  <option value="modern">Modern (Recommended)</option>
+                  <option value="minimal">Minimal</option>
+                  <option value="glass">Glass</option>
+                  <option value="transparent">Transparent</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="qrPosition">Position on Card:</label>
+                <select id="qrPosition">
+                  <option value="bottom-right">Bottom Right</option>
+                  <option value="bottom-left">Bottom Left</option>
+                  <option value="top-right">Top Right</option>
+                  <option value="top-left">Top Left</option>
+                  <option value="center-right">Center Right</option>
+                  <option value="custom">Custom (Drag Me)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="qr-color-control">
+                <label for="qrColor">QR Color:</label>
+                <input id="qrColor" type="color" value="#1a1a2e" />
+                <div class="qr-color-preview" id="qrColorPreview" style="background: #1a1a2e"></div>
+              </div>
+              
+              <div class="qr-color-control">
+                <label for="qrBgColor">Background Color:</label>
+                <input id="qrBgColor" type="color" value="#ffffff" />
+                <div class="qr-color-preview" id="qrBgColorPreview" style="background: #ffffff"></div>
+              </div>
+            </div>
+
+            <div class="qr-controls">
+              <div class="qr-size-control">
+                <label for="qrSize">QR Code Size: <span id="qrSizeValue">80px</span></label>
+                <input id="qrSize" type="range" min="50" max="120" value="80" />
+              </div>
+            </div>
+
+            <div class="shortcut-hint" style="margin-top: 10px;">
+              💡 You can drag and drop the QR Code anywhere on the card
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button id="toggleGrid" class="btn-secondary" style="width: 100%">Enable Grid</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="templates-info">
+        <h3>Available Template Descriptions</h3>
+        <div class="templates-list">
+          <div class="template-desc">
+            <strong>Template 1 — Clean & Warm</strong>
+            <p>Suitable for freelancers and small businesses, features soft colors and eye-friendly design.</p>
+          </div>
+          <div class="template-desc">
+            <strong>Template 2 — Modern Simple</strong>
+            <p>Ideal for designers and creative teams, combines simplicity and modernity.</p>
+          </div>
+          <div class="template-desc">
+            <strong>Template 3 — Corporate</strong>
+            <p>Suitable for traditional companies and consultants, gives a sense of trust and professionalism.</p>
+          </div>
+          <div class="template-desc">
+            <strong>Template 4 — Formal</strong>
+            <p>For large companies and government entities, classic and elegant design.</p>
+          </div>
+          <div class="template-desc">
+            <strong>Template 5 — Creative</strong>
+            <p>For startups and technical teams, with creative and attractive touches.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- External Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+  <!-- New QR Code Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <!-- Main Script -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
